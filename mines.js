@@ -8,13 +8,13 @@
 
         this.isMineOnCoord = isMineOnCoord;
 
-        this.searchMineAround = function(x, y) {
+        this.searchMineAround = function(y, x) {
             var mines = 0;
             for (var currentY = (y - 1); currentY <= (y + 1); ++currentY) {
                 if (currentY > 0 && currentY <= __rows) {
                     for (var currentX = (x - 1); currentX <= (x + 1); ++currentX) {
                         if (currentX > 0 && currentX <= __cols 
-                                && isMineOnCords(currentY, currentX)) {
+                                && isMineOnCoord(currentY, currentX)) {
                             ++mines;
                         }
                     }
@@ -36,6 +36,7 @@
             if (validateParams()) {
                 putMines();
                 console.log(__mines);
+                console.log(__mines.length);
             }
         }
 
@@ -71,7 +72,7 @@
         function putMines() {
             var current = 0;
             __mines = [];
-            while(current <= maxMines) {
+            while(current < __numOfMines) {
                 var y = Math.floor(Math.random() * __rows) + 1;
                 var x = Math.floor(Math.random() * __cols) + 1;
                 if (!isMineOnCoord(y, x)) {
